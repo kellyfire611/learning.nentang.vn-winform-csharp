@@ -12,7 +12,12 @@ namespace QuanLyBanHang.Functions
 {
     public partial class FormDatHang : Form
     {
-        string connectionString = @"Server=172.18.200.190\MSSQLSERVER2016,49166;Database=QuanLyBanHangDatabase;User Id=sa;Password=sa@123;";
+        /// <summary>
+        /// Chuỗi kết nối
+        /// Lấy từ cấu hình (settings) của Project
+        /// </summary>
+        string connectionString = QuanLyBanHang.Properties.Settings.Default.QuanLyBanHangDatabaseConnectionString;
+
         SortedDictionary<int, string> listEmployees = new SortedDictionary<int, string>();
         SortedDictionary<int, string> listCustomers = new SortedDictionary<int, string>();
         SortedDictionary<int, string> listProducts = new SortedDictionary<int, string>();

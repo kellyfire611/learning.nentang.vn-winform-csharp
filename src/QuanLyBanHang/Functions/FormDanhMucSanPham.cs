@@ -10,6 +10,12 @@ namespace QuanLyBanHang.Functions
 {
     public partial class FormDanhMucSanPham : Form
     {
+        /// <summary>
+        /// Chuỗi kết nối
+        /// Lấy từ cấu hình (settings) của Project
+        /// </summary>
+        string connectionString = QuanLyBanHang.Properties.Settings.Default.QuanLyBanHangDatabaseConnectionString;
+
         public FormDanhMucSanPham()
         {
             InitializeComponent();
