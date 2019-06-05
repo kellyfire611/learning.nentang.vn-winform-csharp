@@ -11,8 +11,6 @@ namespace QuanLyBanHang
 {
     public partial class FormMain : Form
     {
-        FormDanhMucKhachHang frmDanhMucKhachHang = null;
-
         public FormMain()
         {
             InitializeComponent();
@@ -30,16 +28,9 @@ namespace QuanLyBanHang
 
         private void ttmiKhachHang_Click(object sender, EventArgs e)
         {
-            if(frmDanhMucKhachHang == null)
-            {
-                frmDanhMucKhachHang = new FormDanhMucKhachHang();
-                frmDanhMucKhachHang.MdiParent = this;
-                frmDanhMucKhachHang.Show();
-            }
-            else
-            {
-                frmDanhMucKhachHang.Activate();
-            }
+            FormDanhMucKhachHang frmDanhMucKhachHang = new FormDanhMucKhachHang();
+            frmDanhMucKhachHang.MdiParent = this;
+            frmDanhMucKhachHang.Show();
         }
 
         private void ttmiNhanVien_Click(object sender, EventArgs e)

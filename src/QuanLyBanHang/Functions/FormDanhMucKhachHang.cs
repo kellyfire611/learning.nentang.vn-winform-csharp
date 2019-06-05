@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -23,8 +24,51 @@ namespace QuanLyBanHang.Functions
 
         private void FormDanhMucKhachHang_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'quanLyBanHangDatabaseDataSet.customers' table. You can move, or remove it, as needed.
-            this.customersTableAdapter.Fill(this.quanLyBanHangDatabaseDataSet.customers);
+            // Load danh sách Khách hàng
+            LoadDanhMucKhachHang();
+        }
+
+        /// <summary>
+        /// Hàm dùng để load danh sách Khách hàng
+        /// </summary>
+        public void LoadDanhMucKhachHang()
+        {
+            // Tạo câu lệnh để thực thi đến database
+            string queryString = "SELECT * FROM customers";
+
+            // Tạo object từ class SqlConnection (dùng để quản lý kết nối đến Database Server)
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    try
+                    {
+                        // Mở kết nối đến Database Server
+                        connection.Open();
+
+                        // Tạo object từ class SqlDataAdapter (dùng để lấy dữ liệu)
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = command;
+
+                        // Đổ dữ liệu vào dataset
+                        adapter.Fill(quanLyBanHangDatabaseDataSet.customers);
+
+                        // Hiển thị dữ liệu
+                        customersBindingSource.DataSource = null;
+                        customersBindingSource.DataSource = quanLyBanHangDatabaseDataSet.configs;
+                        customersDataGridView.Refresh();
+
+                        // Ngắt kết nối đến Database Server
+                        connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Hiển thị thông báo nếu có lỗi
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)

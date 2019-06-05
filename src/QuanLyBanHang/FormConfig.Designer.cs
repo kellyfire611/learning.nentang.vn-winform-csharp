@@ -39,7 +39,7 @@
             this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.configsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.quanLyBanHangDatabaseDataSet1 = new QuanLyBanHang.QuanLyBanHangDatabaseDataSet();
+            this.quanLyBanHangDatabaseDataSet = new QuanLyBanHang.QuanLyBanHangDatabaseDataSet();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@
             idLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.configsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanHangDatabaseDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanHangDatabaseDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // keyLabel
@@ -134,12 +134,12 @@
             // configsBindingSource
             // 
             this.configsBindingSource.DataMember = "configs";
-            this.configsBindingSource.DataSource = this.quanLyBanHangDatabaseDataSet1;
+            this.configsBindingSource.DataSource = this.quanLyBanHangDatabaseDataSet;
             // 
-            // quanLyBanHangDatabaseDataSet1
+            // quanLyBanHangDatabaseDataSet
             // 
-            this.quanLyBanHangDatabaseDataSet1.DataSetName = "QuanLyBanHangDatabaseDataSet";
-            this.quanLyBanHangDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.quanLyBanHangDatabaseDataSet.DataSetName = "QuanLyBanHangDatabaseDataSet";
+            this.quanLyBanHangDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnThoat
             // 
@@ -214,7 +214,7 @@
             this.Load += new System.EventHandler(this.FormConfig_Load);
             ((System.ComponentModel.ISupportInitialize)(this.configsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.configsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanHangDatabaseDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanHangDatabaseDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,7 +230,7 @@
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.TextBox idTextBox;
-        private QuanLyBanHangDatabaseDataSet quanLyBanHangDatabaseDataSet1;
+        private QuanLyBanHangDatabaseDataSet quanLyBanHangDatabaseDataSet;
         private System.Windows.Forms.BindingSource configsBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;

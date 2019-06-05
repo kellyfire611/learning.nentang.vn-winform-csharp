@@ -18,11 +18,19 @@ namespace QuanLyBanHang
         /// </summary>
         string connectionString = QuanLyBanHang.Properties.Settings.Default.QuanLyBanHangDatabaseConnectionString;
 
+        /// <summary>
+        /// Hàm khởi tạo
+        /// </summary>
         public FormConfig()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Hàm xử lý khi sự kiện Load xảy ra (event Load)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormConfig_Load(object sender, EventArgs e)
         {
             // Load danh sách cấu hình
@@ -53,11 +61,11 @@ namespace QuanLyBanHang
                         adapter.SelectCommand = command;
 
                         // Đổ dữ liệu vào dataset
-                        adapter.Fill(quanLyBanHangDatabaseDataSet1.configs);
+                        adapter.Fill(quanLyBanHangDatabaseDataSet.configs);
 
                         // Hiển thị dữ liệu
                         configsBindingSource.DataSource = null;
-                        configsBindingSource.DataSource = quanLyBanHangDatabaseDataSet1.configs;
+                        configsBindingSource.DataSource = quanLyBanHangDatabaseDataSet.configs;
                         configsDataGridView.Refresh();
 
                         // Ngắt kết nối đến Database Server
@@ -90,23 +98,23 @@ namespace QuanLyBanHang
                     {
                         // Mở kết nối đến Database Server
                         connection.Open();
-                        quanLyBanHangDatabaseDataSet1.Clear();
-                        quanLyBanHangDatabaseDataSet1.Reset();
-                        quanLyBanHangDatabaseDataSet1.configs.Clear();
-                        quanLyBanHangDatabaseDataSet1.configs.AcceptChanges();
+                        quanLyBanHangDatabaseDataSet.Clear();
+                        quanLyBanHangDatabaseDataSet.Reset();
+                        quanLyBanHangDatabaseDataSet.configs.Clear();
+                        quanLyBanHangDatabaseDataSet.configs.AcceptChanges();
 
                         // Tạo object từ class SqlDataAdapter (dùng để lấy dữ liệu)
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         adapter.SelectCommand = command;
 
                         // Đổ dữ liệu vào dataset
-                        adapter.Fill(quanLyBanHangDatabaseDataSet1.configs);
+                        adapter.Fill(quanLyBanHangDatabaseDataSet.configs);
 
                         // Hiển thị dữ liệu
                         configsBindingSource.DataMember = null;
                         configsBindingSource.DataSource = null;
                         
-                        configsBindingSource.DataSource = quanLyBanHangDatabaseDataSet1.configs;
+                        configsBindingSource.DataSource = quanLyBanHangDatabaseDataSet.configs;
                         
                         configsDataGridView.Refresh();
 
