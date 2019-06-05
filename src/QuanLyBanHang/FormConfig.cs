@@ -12,7 +12,11 @@ namespace QuanLyBanHang
 {
     public partial class FormConfig : Form
     {
-        string connectionString = @"Server=172.18.200.190\MSSQLSERVER2016,49166;Database=QuanLyBanHangDatabase;User Id=sa;Password=sa@123;";
+        /// <summary>
+        /// Chuỗi kết nối
+        /// Lấy từ cấu hình (settings) của Project
+        /// </summary>
+        string connectionString = QuanLyBanHang.Properties.Settings.Default.QuanLyBanHangDatabaseConnectionString;
 
         public FormConfig()
         {
@@ -143,21 +147,7 @@ namespace QuanLyBanHang
 
                         // Truyền dữ liệu vào đúng tham số
                         command.CommandType = CommandType.Text;
-
-                        // 0:  Nam, 1: nữ
-                        int gioitinh = 0;
-                        if(rdbNam.Checked)
-                        {
-                            gioitinh = 0;
-                        }
-                        else if(rdbNu.Checked)
-                        {
-                            gioitinh = 1;
-                        }
-
-                        command.Parameters.AddWithValue("@gioitinh", gioitinh);
-
-
+                        command.Parameters.AddWithValue("@key", keyTextBox.Text);
                         command.Parameters.AddWithValue("@value", valueTextBox.Text);
 
                         // Thực thi câu lệnh
