@@ -61,6 +61,7 @@ namespace QuanLyBanHang
                         adapter.SelectCommand = command;
 
                         // Đổ dữ liệu vào dataset
+                        quanLyBanHangDatabaseDataSet.configs.Clear();
                         adapter.Fill(quanLyBanHangDatabaseDataSet.configs);
 
                         // Hiển thị dữ liệu
