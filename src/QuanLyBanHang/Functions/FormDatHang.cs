@@ -429,14 +429,34 @@ namespace QuanLyBanHang.Functions
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
-            FormReport frm = new FormReport();
-            foreach (DataRow row in quanLyBanHangDatabaseDataSet.order_details.Rows)
+            // Chuẩn bị dữ liệu
+            quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang.Rows.Clear();
+            foreach (QuanLyBanHangDatabaseDataSet.order_detailsRow orderDetailRow in quanLyBanHangDatabaseDataSet.order_details.Rows)
             {
-                row["report_tenkhachhang"] = cbbCustomer.Text;
-                row["report_tennhanvien"] = cbbEmployee.Text;
+                var row = quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang.NewReportHoaDonBanHangRow();
+
+                // Nạp thông tin Chung về Công ty lấy từ Cấu hình (config)
+                
+
+                // Nạp thông tin về Khách hàng (customer)
+
+                // Nạp thông tin về Đơn hàng (order)
+                row.report_ordered_date_day = order_dateDateTimePicker.Value.Day.ToString();
+                row.report_ordered_date_month = order_dateDateTimePicker.Value.Month.ToString();
+                row.report_ordered_date_year = order_dateDateTimePicker.Value.Year.ToString();
+
+                // Nạp thông tin về Đơn hàng Chi tiết (order_detail)
+                row.report_order_detail_product_name = orderDetailRow.product_id.ToString();
+
+                // Add dòng dữ liệu vào DataTable
+                quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang.AddReportHoaDonBanHangRow(row);
             }
 
-            frm.Data = quanLyBanHangDatabaseDataSet;
+            // Hiển thị FormReport
+            FormReport frm = new FormReport();
+            frm.reportViewerCommon.LocalReport.ReportEmbeddedResource = "QuanLyBanHang.Reports.ReportHoaDonDatHang.rdlc";
+            frm.ReportDataSourceName = "DataSetReportOrder";
+            frm.Data = quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang;
             frm.ShowDialog();
         }
     }

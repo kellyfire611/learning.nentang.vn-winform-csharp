@@ -1,7 +1,13 @@
-﻿namespace QuanLyBanHang {
-    
-    
-    public partial class QuanLyBanHangDatabaseDataSet {
+﻿namespace QuanLyBanHang
+{
+
+
+    public partial class QuanLyBanHangDatabaseDataSet
+    {
+        partial class ReportHoaDonBanHangDataTable
+        {
+        }
+
         partial class BaoCaoDoanhThuDataTable
         {
         }

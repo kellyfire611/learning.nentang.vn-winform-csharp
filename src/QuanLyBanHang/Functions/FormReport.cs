@@ -18,7 +18,8 @@ namespace QuanLyBanHang.Functions
         /// </summary>
         string connectionString = QuanLyBanHang.Properties.Settings.Default.QuanLyBanHangDatabaseConnectionString;
 
-        public QuanLyBanHangDatabaseDataSet Data { get; set; }
+        public string ReportDataSourceName { get; set; }
+        public object Data { get; set; }
 
         public FormReport()
         {
@@ -27,11 +28,11 @@ namespace QuanLyBanHang.Functions
 
         private void FormReport_Load(object sender, EventArgs e)
         {
-            ReportDataSource rds = new ReportDataSource("DataSetOrderDetails", Data.Tables["order_details"]);
-            this.reportViewer1.LocalReport.DataSources.Clear();
-            this.reportViewer1.LocalReport.DataSources.Add(rds);
-            this.reportViewer1.LocalReport.Refresh();
-            this.reportViewer1.RefreshReport();
+            ReportDataSource rds = new ReportDataSource(this.ReportDataSourceName, this.Data);
+            this.reportViewerCommon.LocalReport.DataSources.Clear();
+            this.reportViewerCommon.LocalReport.DataSources.Add(rds);
+            this.reportViewerCommon.LocalReport.Refresh();
+            this.reportViewerCommon.RefreshReport();
         }
     }
 }

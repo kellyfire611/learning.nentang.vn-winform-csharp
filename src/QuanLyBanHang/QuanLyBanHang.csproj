@@ -209,7 +209,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reports\ReportHoaDonBanHang.rdlc" />
+    <EmbeddedResource Include="Reports\ReportHoaDonDatHang.rdlc" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
