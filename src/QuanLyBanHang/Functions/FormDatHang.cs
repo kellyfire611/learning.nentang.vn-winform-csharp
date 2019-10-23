@@ -40,8 +40,8 @@ namespace QuanLyBanHang.Functions
         /// </summary>
         public void LoadDanhSachDonHang()
         {
-            string tuNgay = dtpTuNgay.Value.ToString("yyyy-MM-dd HH:mm:ss");
-            string denNgay = dtpDenNgay.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            string tuNgay = dtpTuNgay.Value.ToString("yyyy-MM-dd HH:mm:ss"); // 2019-10-21 20:35:33
+            string denNgay = dtpDenNgay.Value.ToString("yyyy-MM-dd HH:mm:ss"); // 2019-10-21 20:35:33
 
             // Tạo câu lệnh để thực thi đến database
             string queryString = String.Format("SELECT * FROM orders WHERE order_date BETWEEN '{0}' AND '{1}'", tuNgay,  denNgay);
@@ -62,6 +62,7 @@ namespace QuanLyBanHang.Functions
                         adapter.SelectCommand = command;
 
                         // Đổ dữ liệu vào dataset
+                        quanLyBanHangDatabaseDataSet.orders.Clear();
                         adapter.Fill(quanLyBanHangDatabaseDataSet.orders);
 
                         // Hiển thị dữ liệu
