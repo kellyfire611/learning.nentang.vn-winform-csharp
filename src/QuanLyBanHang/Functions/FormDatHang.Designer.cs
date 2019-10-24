@@ -50,7 +50,7 @@
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label6;
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpThongTinDonHang = new System.Windows.Forms.GroupBox();
             this.cbbCustomer = new System.Windows.Forms.ComboBox();
             this.cbbEmployee = new System.Windows.Forms.ComboBox();
             this.nudShipping_fee = new System.Windows.Forms.NumericUpDown();
@@ -66,7 +66,7 @@
             this.ship_nameTextBox = new System.Windows.Forms.TextBox();
             this.shipped_dateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.order_dateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpThongTinChiTietDonHang = new System.Windows.Forms.GroupBox();
             this.nudGiamGia = new System.Windows.Forms.NumericUpDown();
             this.nudDonGia = new System.Windows.Forms.NumericUpDown();
             this.nudSoLuong = new System.Windows.Forms.NumericUpDown();
@@ -82,7 +82,7 @@
             this.orderdetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.quanLyBanHangDatabaseDataSet = new QuanLyBanHang.QuanLyBanHangDatabaseDataSet();
             this.btnThemChiTiet = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.grpDanhSachDonHang = new System.Windows.Forms.GroupBox();
             this.btnLayDanhSachDonHang = new System.Windows.Forms.Button();
             this.dgvDonHang = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -131,16 +131,16 @@
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.grpThongTinDonHang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudShipping_fee)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.grpThongTinChiTietDonHang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudGiamGia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDonGia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietDonHang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderdetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quanLyBanHangDatabaseDataSet)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            this.grpDanhSachDonHang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonHang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -334,44 +334,44 @@
             label6.TabIndex = 4;
             label6.Text = "to date:";
             // 
-            // groupBox1
+            // grpThongTinDonHang
             // 
-            this.groupBox1.Controls.Add(this.cbbCustomer);
-            this.groupBox1.Controls.Add(this.cbbEmployee);
-            this.groupBox1.Controls.Add(this.nudShipping_fee);
-            this.groupBox1.Controls.Add(order_statusLabel);
-            this.groupBox1.Controls.Add(this.order_statusTextBox);
-            this.groupBox1.Controls.Add(paid_dateLabel);
-            this.groupBox1.Controls.Add(this.paid_dateDateTimePicker);
-            this.groupBox1.Controls.Add(payment_typeLabel);
-            this.groupBox1.Controls.Add(this.payment_typeTextBox);
-            this.groupBox1.Controls.Add(shipping_feeLabel);
-            this.groupBox1.Controls.Add(ship_countryLabel);
-            this.groupBox1.Controls.Add(this.ship_countryTextBox);
-            this.groupBox1.Controls.Add(ship_postal_codeLabel);
-            this.groupBox1.Controls.Add(this.ship_postal_codeTextBox);
-            this.groupBox1.Controls.Add(ship_stateLabel);
-            this.groupBox1.Controls.Add(this.ship_stateTextBox);
-            this.groupBox1.Controls.Add(ship_cityLabel);
-            this.groupBox1.Controls.Add(this.ship_cityTextBox);
-            this.groupBox1.Controls.Add(ship_address2Label);
-            this.groupBox1.Controls.Add(this.ship_address2TextBox);
-            this.groupBox1.Controls.Add(ship_address1Label);
-            this.groupBox1.Controls.Add(this.ship_address1TextBox);
-            this.groupBox1.Controls.Add(ship_nameLabel);
-            this.groupBox1.Controls.Add(this.ship_nameTextBox);
-            this.groupBox1.Controls.Add(shipped_dateLabel);
-            this.groupBox1.Controls.Add(this.shipped_dateDateTimePicker);
-            this.groupBox1.Controls.Add(order_dateLabel);
-            this.groupBox1.Controls.Add(this.order_dateDateTimePicker);
-            this.groupBox1.Controls.Add(customer_idLabel);
-            this.groupBox1.Controls.Add(employee_idLabel);
-            this.groupBox1.Location = new System.Drawing.Point(317, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(808, 178);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin Đơn hàng";
+            this.grpThongTinDonHang.Controls.Add(this.cbbCustomer);
+            this.grpThongTinDonHang.Controls.Add(this.cbbEmployee);
+            this.grpThongTinDonHang.Controls.Add(this.nudShipping_fee);
+            this.grpThongTinDonHang.Controls.Add(order_statusLabel);
+            this.grpThongTinDonHang.Controls.Add(this.order_statusTextBox);
+            this.grpThongTinDonHang.Controls.Add(paid_dateLabel);
+            this.grpThongTinDonHang.Controls.Add(this.paid_dateDateTimePicker);
+            this.grpThongTinDonHang.Controls.Add(payment_typeLabel);
+            this.grpThongTinDonHang.Controls.Add(this.payment_typeTextBox);
+            this.grpThongTinDonHang.Controls.Add(shipping_feeLabel);
+            this.grpThongTinDonHang.Controls.Add(ship_countryLabel);
+            this.grpThongTinDonHang.Controls.Add(this.ship_countryTextBox);
+            this.grpThongTinDonHang.Controls.Add(ship_postal_codeLabel);
+            this.grpThongTinDonHang.Controls.Add(this.ship_postal_codeTextBox);
+            this.grpThongTinDonHang.Controls.Add(ship_stateLabel);
+            this.grpThongTinDonHang.Controls.Add(this.ship_stateTextBox);
+            this.grpThongTinDonHang.Controls.Add(ship_cityLabel);
+            this.grpThongTinDonHang.Controls.Add(this.ship_cityTextBox);
+            this.grpThongTinDonHang.Controls.Add(ship_address2Label);
+            this.grpThongTinDonHang.Controls.Add(this.ship_address2TextBox);
+            this.grpThongTinDonHang.Controls.Add(ship_address1Label);
+            this.grpThongTinDonHang.Controls.Add(this.ship_address1TextBox);
+            this.grpThongTinDonHang.Controls.Add(ship_nameLabel);
+            this.grpThongTinDonHang.Controls.Add(this.ship_nameTextBox);
+            this.grpThongTinDonHang.Controls.Add(shipped_dateLabel);
+            this.grpThongTinDonHang.Controls.Add(this.shipped_dateDateTimePicker);
+            this.grpThongTinDonHang.Controls.Add(order_dateLabel);
+            this.grpThongTinDonHang.Controls.Add(this.order_dateDateTimePicker);
+            this.grpThongTinDonHang.Controls.Add(customer_idLabel);
+            this.grpThongTinDonHang.Controls.Add(employee_idLabel);
+            this.grpThongTinDonHang.Location = new System.Drawing.Point(317, 12);
+            this.grpThongTinDonHang.Name = "grpThongTinDonHang";
+            this.grpThongTinDonHang.Size = new System.Drawing.Size(808, 178);
+            this.grpThongTinDonHang.TabIndex = 0;
+            this.grpThongTinDonHang.TabStop = false;
+            this.grpThongTinDonHang.Text = "Thông tin Đơn hàng";
             // 
             // cbbCustomer
             // 
@@ -480,24 +480,24 @@
             this.order_dateDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.order_dateDateTimePicker.TabIndex = 5;
             // 
-            // groupBox2
+            // grpThongTinChiTietDonHang
             // 
-            this.groupBox2.Controls.Add(this.nudGiamGia);
-            this.groupBox2.Controls.Add(this.nudDonGia);
-            this.groupBox2.Controls.Add(this.nudSoLuong);
-            this.groupBox2.Controls.Add(this.cbbProduct);
-            this.groupBox2.Controls.Add(this.dgvChiTietDonHang);
-            this.groupBox2.Controls.Add(this.btnThemChiTiet);
-            this.groupBox2.Controls.Add(label4);
-            this.groupBox2.Controls.Add(label3);
-            this.groupBox2.Controls.Add(label2);
-            this.groupBox2.Controls.Add(label1);
-            this.groupBox2.Location = new System.Drawing.Point(317, 196);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(808, 219);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Thông tin chi tiết Đơn hàng";
+            this.grpThongTinChiTietDonHang.Controls.Add(this.nudGiamGia);
+            this.grpThongTinChiTietDonHang.Controls.Add(this.nudDonGia);
+            this.grpThongTinChiTietDonHang.Controls.Add(this.nudSoLuong);
+            this.grpThongTinChiTietDonHang.Controls.Add(this.cbbProduct);
+            this.grpThongTinChiTietDonHang.Controls.Add(this.dgvChiTietDonHang);
+            this.grpThongTinChiTietDonHang.Controls.Add(this.btnThemChiTiet);
+            this.grpThongTinChiTietDonHang.Controls.Add(label4);
+            this.grpThongTinChiTietDonHang.Controls.Add(label3);
+            this.grpThongTinChiTietDonHang.Controls.Add(label2);
+            this.grpThongTinChiTietDonHang.Controls.Add(label1);
+            this.grpThongTinChiTietDonHang.Location = new System.Drawing.Point(317, 196);
+            this.grpThongTinChiTietDonHang.Name = "grpThongTinChiTietDonHang";
+            this.grpThongTinChiTietDonHang.Size = new System.Drawing.Size(808, 219);
+            this.grpThongTinChiTietDonHang.TabIndex = 1;
+            this.grpThongTinChiTietDonHang.TabStop = false;
+            this.grpThongTinChiTietDonHang.Text = "Thông tin chi tiết Đơn hàng";
             // 
             // nudGiamGia
             // 
@@ -609,20 +609,20 @@
             this.btnThemChiTiet.UseVisualStyleBackColor = true;
             this.btnThemChiTiet.Click += new System.EventHandler(this.btnThemChiTiet_Click);
             // 
-            // groupBox3
+            // grpDanhSachDonHang
             // 
-            this.groupBox3.Controls.Add(this.btnLayDanhSachDonHang);
-            this.groupBox3.Controls.Add(this.dgvDonHang);
-            this.groupBox3.Controls.Add(this.dtpDenNgay);
-            this.groupBox3.Controls.Add(label6);
-            this.groupBox3.Controls.Add(this.dtpTuNgay);
-            this.groupBox3.Controls.Add(label5);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(299, 403);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Danh sách đơn hàng";
+            this.grpDanhSachDonHang.Controls.Add(this.btnLayDanhSachDonHang);
+            this.grpDanhSachDonHang.Controls.Add(this.dgvDonHang);
+            this.grpDanhSachDonHang.Controls.Add(this.dtpDenNgay);
+            this.grpDanhSachDonHang.Controls.Add(label6);
+            this.grpDanhSachDonHang.Controls.Add(this.dtpTuNgay);
+            this.grpDanhSachDonHang.Controls.Add(label5);
+            this.grpDanhSachDonHang.Location = new System.Drawing.Point(12, 12);
+            this.grpDanhSachDonHang.Name = "grpDanhSachDonHang";
+            this.grpDanhSachDonHang.Size = new System.Drawing.Size(299, 403);
+            this.grpDanhSachDonHang.TabIndex = 2;
+            this.grpDanhSachDonHang.TabStop = false;
+            this.grpDanhSachDonHang.Text = "Danh sách đơn hàng";
             // 
             // btnLayDanhSachDonHang
             // 
@@ -656,7 +656,7 @@
             this.paiddateDataGridViewTextBoxColumn,
             this.orderstatusDataGridViewTextBoxColumn});
             this.dgvDonHang.DataSource = this.ordersBindingSource;
-            this.dgvDonHang.Location = new System.Drawing.Point(6, 91);
+            this.dgvDonHang.Location = new System.Drawing.Point(5, 91);
             this.dgvDonHang.Name = "dgvDonHang";
             this.dgvDonHang.Size = new System.Drawing.Size(287, 306);
             this.dgvDonHang.TabIndex = 0;
@@ -810,6 +810,7 @@
             this.btnSua.TabIndex = 8;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -819,6 +820,7 @@
             this.btnXoa.TabIndex = 9;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnLuu
             // 
@@ -860,25 +862,25 @@
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.btnThoat);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpDanhSachDonHang);
+            this.Controls.Add(this.grpThongTinChiTietDonHang);
+            this.Controls.Add(this.grpThongTinDonHang);
             this.Name = "FormDatHang";
             this.Text = "Form đặt hàng";
             this.Load += new System.EventHandler(this.FormDatHang_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpThongTinDonHang.ResumeLayout(false);
+            this.grpThongTinDonHang.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudShipping_fee)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grpThongTinChiTietDonHang.ResumeLayout(false);
+            this.grpThongTinChiTietDonHang.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudGiamGia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDonGia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSoLuong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietDonHang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderdetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.quanLyBanHangDatabaseDataSet)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.grpDanhSachDonHang.ResumeLayout(false);
+            this.grpDanhSachDonHang.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonHang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -887,7 +889,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpThongTinDonHang;
         private System.Windows.Forms.TextBox order_statusTextBox;
         private System.Windows.Forms.DateTimePicker paid_dateDateTimePicker;
         private System.Windows.Forms.TextBox payment_typeTextBox;
@@ -900,8 +902,8 @@
         private System.Windows.Forms.TextBox ship_nameTextBox;
         private System.Windows.Forms.DateTimePicker shipped_dateDateTimePicker;
         private System.Windows.Forms.DateTimePicker order_dateDateTimePicker;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox grpThongTinChiTietDonHang;
+        private System.Windows.Forms.GroupBox grpDanhSachDonHang;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;

@@ -22,11 +22,70 @@ namespace QuanLyBanHang.Functions
         SortedDictionary<int, string> listCustomers = new SortedDictionary<int, string>();
         SortedDictionary<int, string> listProducts = new SortedDictionary<int, string>();
 
+        /* Biến lưu trữ Trạng thái của Form. 
+         * Các trạng thái của Form: 
+         * - View   : chỉ xem, không được hiệu chỉnh gì
+         * - Create : clear dữ liệu, cho phép nhập dữ liệu
+         * - Edit   : lấy dữ liệu cũ, cho phép hiệu chỉnh dữ liệu đang có
+         * => Mặc định khi mở Form sẽ là trạng thái VIEW
+         */
+        string _formStatus = "View";
+
+        public string FormStatus
+        {
+            get
+            {
+                return _formStatus;
+            }
+            set
+            {
+                _formStatus = value;
+                // Thay đổi trạng thái của các Controls tương ứng với Trạng thái của Form
+                switch (_formStatus)
+                {
+                    case "View":
+                        // Danh sách Đơn hàng
+                        dtpTuNgay.Enabled = true;
+                        dtpDenNgay.Enabled = true;
+                        btnLayDanhSachDonHang.Enabled = true;
+
+                        // Thông tin Đơn hàng
+                        grpThongTinDonHang.Enabled = false;
+
+                        // Thông tin Chi tiết Đơn hàng
+                        grpThongTinChiTietDonHang.Enabled = false;
+                        break;
+                    case "Create":
+                        // Danh sách Đơn hàng
+                        dtpTuNgay.Enabled = false;
+                        dtpDenNgay.Enabled = false;
+                        btnLayDanhSachDonHang.Enabled = false;
+
+                        // Thông tin Đơn hàng
+                        grpThongTinDonHang.Enabled = true;
+
+                        // Thông tin Chi tiết Đơn hàng
+                        grpThongTinChiTietDonHang.Enabled = true;
+                        break;
+                    case "Edit":
+                        // Danh sách Đơn hàng
+                        dtpTuNgay.Enabled = false;
+                        dtpDenNgay.Enabled = false;
+                        btnLayDanhSachDonHang.Enabled = false;
+
+                        // Thông tin Đơn hàng
+                        grpThongTinDonHang.Enabled = true;
+
+                        // Thông tin Chi tiết Đơn hàng
+                        grpThongTinChiTietDonHang.Enabled = true;
+                        break;
+                }
+            }
+        }
+
         public FormDatHang()
         {
             InitializeComponent();
-
-            
         }
 
         private void btnLayDanhSachDonHang_Click(object sender, EventArgs e)
@@ -44,7 +103,7 @@ namespace QuanLyBanHang.Functions
             string denNgay = dtpDenNgay.Value.ToString("yyyy-MM-dd HH:mm:ss"); // 2019-10-21 20:35:33
 
             // Tạo câu lệnh để thực thi đến database
-            string queryString = String.Format("SELECT * FROM orders WHERE order_date BETWEEN '{0}' AND '{1}'", tuNgay,  denNgay);
+            string queryString = String.Format("SELECT * FROM orders WHERE order_date BETWEEN '{0}' AND '{1}'", tuNgay, denNgay);
 
             // Tạo object từ class SqlConnection (dùng để quản lý kết nối đến Database Server)
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -257,7 +316,7 @@ namespace QuanLyBanHang.Functions
                         adapter.Fill(quanLyBanHangDatabaseDataSet.order_details);
 
                         // Hiển thị dữ liệu
-                        orderdetailsBindingSource.DataSource = null;
+                        quanLyBanHangDatabaseDataSet.order_details.Clear();
                         orderdetailsBindingSource.DataSource = quanLyBanHangDatabaseDataSet.order_details;
                         dgvChiTietDonHang.Refresh();
 
@@ -281,18 +340,38 @@ namespace QuanLyBanHang.Functions
                 // Lấy dữ liệu của dòng dữ liệu đang chọn
                 DataGridViewRow row = this.dgvDonHang.Rows[e.RowIndex];
 
-                // Binding vào các textbox tương ứng
-                var idEmployee = Convert.ToInt32(row.Cells["employeeidDataGridViewTextBoxColumn"].Value);
-                cbbEmployee.SelectedItem = cbbEmployee.Items.Cast<KeyValuePair<int, string>>().First(item => item.Key == idEmployee);
+                // Binding vào các ComboBox tương ứng
+                // - ComboBox Nhân viên (Employee)
+                if (row.Cells["employeeidDataGridViewTextBoxColumn"].Value != null && row.Cells["employeeidDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    var idEmployee = Convert.ToInt32(row.Cells["employeeidDataGridViewTextBoxColumn"].Value);
+                    cbbEmployee.SelectedItem = cbbEmployee.Items.Cast<KeyValuePair<int, string>>().First(item => item.Key == idEmployee);
+                }
 
-                var idCustomer = Convert.ToInt32(row.Cells["customeridDataGridViewTextBoxColumn"].Value);
-                cbbCustomer.SelectedItem = cbbCustomer.Items.Cast<KeyValuePair<int, string>>().First(item => item.Key == idCustomer);
+                // - ComboBox Khách hàng (Customer)
+                if (row.Cells["customeridDataGridViewTextBoxColumn"].Value != null && row.Cells["customeridDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    var idCustomer = Convert.ToInt32(row.Cells["customeridDataGridViewTextBoxColumn"].Value);
+                    cbbCustomer.SelectedItem = cbbCustomer.Items.Cast<KeyValuePair<int, string>>().First(item => item.Key == idCustomer);
+                }
 
-                order_dateDateTimePicker.Text = row.Cells["orderdateDataGridViewTextBoxColumn"].Value.ToString();
+                // Binding vào các textbox thông tin Order tương ứng
+                // TODO: bổ sung đầy đủ Binding cho các trường cần thiết
+                if (row.Cells["orderdateDataGridViewTextBoxColumn"].Value != null && row.Cells["orderdateDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    order_dateDateTimePicker.Text = row.Cells["orderdateDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shipnameDataGridViewTextBoxColumn"].Value != null && row.Cells["shipnameDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_nameTextBox.Text = row.Cells["shipnameDataGridViewTextBoxColumn"].Value.ToString();
+                }
 
                 // Load chi tiết đơn hàng bởi ID đơn hàng
-                var idDonHang = Convert.ToInt32(row.Cells["idDataGridViewTextBoxColumn"].Value);
-                LoadChiTietDonHang(idDonHang);
+                if (row.Cells["idDataGridViewTextBoxColumn"].Value != null && row.Cells["idDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    var idDonHang = Convert.ToInt32(row.Cells["idDataGridViewTextBoxColumn"].Value);
+                    LoadChiTietDonHang(idDonHang);
+                }
             }
         }
 
@@ -302,17 +381,28 @@ namespace QuanLyBanHang.Functions
             LoadDanhSachNhanVien();
             LoadDanhSachKhachHang();
             LoadDanhSachSanPham();
+
+            // Chuyển đổi trạng thái của Form
+            this.FormStatus = "View";
         }
 
         // Clear dữ liệu
         public void ClearData()
         {
+            // Clear thông tin Combobox
             cbbEmployee.Text = "";
             cbbCustomer.Text = "";
-            order_dateDateTimePicker.Value = DateTime.Now;
 
-            // clear dữ liệu chi tiết đơn hàng
+            // Clear thông tin Đơn hàng
+            // TODO: clear tất cả thông tin đã Binding của Đơn hàng
+            order_dateDateTimePicker.Value = DateTime.Now;
+            ship_nameTextBox.Text = "";
+
+            // Clear dữ liệu chi tiết đơn hàng
             cbbProduct.Text = "";
+            nudSoLuong.Value = 0;
+            nudDonGia.Value = 0;
+            nudGiamGia.Value = 0;
             quanLyBanHangDatabaseDataSet.order_details.Clear();
         }
 
@@ -320,6 +410,9 @@ namespace QuanLyBanHang.Functions
         {
             // Clear dữ liệu
             ClearData();
+
+            // Chuyển đổi trạng thái của Form
+            this.FormStatus = "Create";
         }
 
         private void btnThemChiTiet_Click(object sender, EventArgs e)
@@ -437,7 +530,7 @@ namespace QuanLyBanHang.Functions
                 var row = quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang.NewReportHoaDonBanHangRow();
 
                 // Nạp thông tin Chung về Công ty lấy từ Cấu hình (config)
-                
+
 
                 // Nạp thông tin về Khách hàng (customer)
 
@@ -459,6 +552,16 @@ namespace QuanLyBanHang.Functions
             frm.ReportDataSourceName = "DataSetReportOrder";
             frm.Data = quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang;
             frm.ShowDialog();
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
