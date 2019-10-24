@@ -334,6 +334,12 @@ namespace QuanLyBanHang.Functions
 
         private void dgvDonHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Chỉ xử lý Binding khi Form đang ở trạng thái "View"
+            if(this.FormStatus != "View")
+            {
+                return;
+            }
+
             // Nếu đang chọn dòng dữ liệu (RowIndex > 0)
             if (e.RowIndex >= 0)
             {
@@ -438,87 +444,100 @@ namespace QuanLyBanHang.Functions
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            // Tạo câu lệnh để thực thi đến database
-            string queryString = @"INSERT INTO orders(employee_id, customer_id, order_date, shipped_date, ship_name, ship_address1, ship_address2, ship_city, ship_state, ship_postal_code, ship_country, shipping_fee, payment_type, paid_date, order_status)"
-                               + " VALUES(@employee_id, @customer_id, @order_date, @shipped_date, @ship_name, @ship_address1, @ship_address2, @ship_city, @ship_state, @ship_postal_code, @ship_country, @shipping_fee, @payment_type, @paid_date, @order_status);"
-                               + " SELECT CAST(scope_identity() AS int)";
-
-            // Tạo object từ class SqlConnection (dùng để quản lý kết nối đến Database Server)
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Xử lý theo từng trường hợp
+            switch (this.FormStatus)
             {
-                // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
-                using (SqlCommand command = new SqlCommand(queryString, connection))
-                {
-                    try
+                // Xử lý Lưu cho trường hợp Thêm mới dữ liệu
+                case "Create":
+                    // Tạo câu lệnh để thực thi đến database
+                    string queryString = @"INSERT INTO orders(employee_id, customer_id, order_date, shipped_date, ship_name, ship_address1, ship_address2, ship_city, ship_state, ship_postal_code, ship_country, shipping_fee, payment_type, paid_date, order_status)"
+                                       + " VALUES(@employee_id, @customer_id, @order_date, @shipped_date, @ship_name, @ship_address1, @ship_address2, @ship_city, @ship_state, @ship_postal_code, @ship_country, @shipping_fee, @payment_type, @paid_date, @order_status);"
+                                       + " SELECT CAST(scope_identity() AS int)";
+
+                    // Tạo object từ class SqlConnection (dùng để quản lý kết nối đến Database Server)
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        // Mở kết nối đến Database Server
-                        connection.Open();
-
-                        // Truyền dữ liệu vào đúng tham số
-                        command.CommandType = CommandType.Text;
-                        command.Parameters.AddWithValue("@employee_id", ((KeyValuePair<int, string>)cbbEmployee.SelectedItem).Key);
-                        command.Parameters.AddWithValue("@customer_id", ((KeyValuePair<int, string>)cbbCustomer.SelectedItem).Key);
-                        command.Parameters.AddWithValue("@order_date", order_dateDateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                        command.Parameters.AddWithValue("@shipped_date", shipped_dateDateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                        command.Parameters.AddWithValue("@ship_name", ship_nameTextBox.Text);
-                        command.Parameters.AddWithValue("@ship_address1", ship_address1TextBox.Text);
-                        command.Parameters.AddWithValue("@ship_address2", ship_address2TextBox.Text);
-                        command.Parameters.AddWithValue("@ship_city", ship_cityTextBox.Text);
-                        command.Parameters.AddWithValue("@ship_state", ship_stateTextBox.Text);
-                        command.Parameters.AddWithValue("@ship_postal_code", ship_postal_codeTextBox.Text);
-                        command.Parameters.AddWithValue("@ship_country", ship_countryTextBox.Text);
-                        command.Parameters.AddWithValue("@shipping_fee", nudShipping_fee.Value);
-                        command.Parameters.AddWithValue("@payment_type", payment_typeTextBox.Text);
-                        command.Parameters.AddWithValue("@paid_date", paid_dateDateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                        command.Parameters.AddWithValue("@order_status", order_statusTextBox.Text);
-
-                        // Thực thi câu lệnh INSERT order và lấy ORDER_ID
-                        int orderIdInserted = (int)command.ExecuteScalar();
-
-                        // Insert table Order_details
-                        foreach (DataRow row in quanLyBanHangDatabaseDataSet.order_details.Rows)
+                        // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
+                        using (SqlCommand command = new SqlCommand(queryString, connection))
                         {
-                            int orderId = orderIdInserted;
-                            int productId = Convert.ToInt32(row["product_id"]);
-                            decimal soLuong = Convert.ToInt32(row["quantity"]);
-                            decimal donGia = Convert.ToInt32(row["unit_price"]);
-                            decimal giamGia = Convert.ToInt32(row["discount"]);
-                            string status = row["order_detail_status"].ToString();
-                            string dateAllocated = row["date_allocated"].ToString();
-
-                            string subQueryString = @"INSERT INTO order_details(order_id, product_id, quantity, unit_price, discount, order_detail_status, date_allocated)"
-                               + " VALUES(@order_id, @product_id, @quantity, @unit_price, @discount, @order_detail_status, @date_allocated)";
-
-                            // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
-                            using (SqlCommand subCommand = new SqlCommand(subQueryString, connection))
+                            try
                             {
-                                // Truyền dữ liệu vào đúng tham số
-                                subCommand.CommandType = CommandType.Text;
-                                subCommand.Parameters.AddWithValue("@order_id", orderId);
-                                subCommand.Parameters.AddWithValue("@product_id", productId);
-                                subCommand.Parameters.AddWithValue("@quantity", soLuong);
-                                subCommand.Parameters.AddWithValue("@unit_price", donGia);
-                                subCommand.Parameters.AddWithValue("@discount", giamGia);
-                                subCommand.Parameters.AddWithValue("@order_detail_status", status);
-                                subCommand.Parameters.AddWithValue("@date_allocated", dateAllocated);
+                                // Mở kết nối đến Database Server
+                                connection.Open();
 
-                                subCommand.ExecuteNonQuery();
+                                // Truyền dữ liệu vào đúng tham số
+                                command.CommandType = CommandType.Text;
+                                command.Parameters.AddWithValue("@employee_id", ((KeyValuePair<int, string>)cbbEmployee.SelectedItem).Key);
+                                command.Parameters.AddWithValue("@customer_id", ((KeyValuePair<int, string>)cbbCustomer.SelectedItem).Key);
+                                command.Parameters.AddWithValue("@order_date", order_dateDateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                                command.Parameters.AddWithValue("@shipped_date", shipped_dateDateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                                command.Parameters.AddWithValue("@ship_name", ship_nameTextBox.Text);
+                                command.Parameters.AddWithValue("@ship_address1", ship_address1TextBox.Text);
+                                command.Parameters.AddWithValue("@ship_address2", ship_address2TextBox.Text);
+                                command.Parameters.AddWithValue("@ship_city", ship_cityTextBox.Text);
+                                command.Parameters.AddWithValue("@ship_state", ship_stateTextBox.Text);
+                                command.Parameters.AddWithValue("@ship_postal_code", ship_postal_codeTextBox.Text);
+                                command.Parameters.AddWithValue("@ship_country", ship_countryTextBox.Text);
+                                command.Parameters.AddWithValue("@shipping_fee", nudShipping_fee.Value);
+                                command.Parameters.AddWithValue("@payment_type", payment_typeTextBox.Text);
+                                command.Parameters.AddWithValue("@paid_date", paid_dateDateTimePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                                command.Parameters.AddWithValue("@order_status", order_statusTextBox.Text);
+
+                                // Thực thi câu lệnh INSERT order và lấy ORDER_ID
+                                int orderIdInserted = (int)command.ExecuteScalar();
+
+                                // Insert table Order_details
+                                foreach (DataRow row in quanLyBanHangDatabaseDataSet.order_details.Rows)
+                                {
+                                    int orderId = orderIdInserted;
+                                    int productId = Convert.ToInt32(row["product_id"]);
+                                    decimal soLuong = Convert.ToInt32(row["quantity"]);
+                                    decimal donGia = Convert.ToInt32(row["unit_price"]);
+                                    decimal giamGia = Convert.ToInt32(row["discount"]);
+                                    string status = row["order_detail_status"].ToString();
+                                    string dateAllocated = row["date_allocated"].ToString();
+
+                                    string subQueryString = @"INSERT INTO order_details(order_id, product_id, quantity, unit_price, discount, order_detail_status, date_allocated)"
+                                       + " VALUES(@order_id, @product_id, @quantity, @unit_price, @discount, @order_detail_status, @date_allocated)";
+
+                                    // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
+                                    using (SqlCommand subCommand = new SqlCommand(subQueryString, connection))
+                                    {
+                                        // Truyền dữ liệu vào đúng tham số
+                                        subCommand.CommandType = CommandType.Text;
+                                        subCommand.Parameters.AddWithValue("@order_id", orderId);
+                                        subCommand.Parameters.AddWithValue("@product_id", productId);
+                                        subCommand.Parameters.AddWithValue("@quantity", soLuong);
+                                        subCommand.Parameters.AddWithValue("@unit_price", donGia);
+                                        subCommand.Parameters.AddWithValue("@discount", giamGia);
+                                        subCommand.Parameters.AddWithValue("@order_detail_status", status);
+                                        subCommand.Parameters.AddWithValue("@date_allocated", dateAllocated);
+
+                                        subCommand.ExecuteNonQuery();
+                                    }
+                                }
+
+                                // Ngắt kết nối đến Database Server
+                                connection.Close();
+
+                                // Sau khi Lưu thành công, chuyển trạng thái Form về VIEW
+                                this.FormStatus = "View";
+                            }
+                            catch (Exception ex)
+                            {
+                                // Hiển thị thông báo nếu có lỗi
+                                MessageBox.Show(ex.Message);
                             }
                         }
-
-                        // Ngắt kết nối đến Database Server
-                        connection.Close();
-
-                        // Load lại danh sách cấu hình
-                        //LoadDanhMucCauHinh();
                     }
-                    catch (Exception ex)
-                    {
-                        // Hiển thị thông báo nếu có lỗi
-                        MessageBox.Show(ex.Message);
-                    }
-                }
+                    break;
+                // Xử lý Lưu cho trường hợp Sửa dữ liệu
+                case "Edit":
+                    // TODO: xử lý lưu
+                    break;
             }
+
+
         }
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
