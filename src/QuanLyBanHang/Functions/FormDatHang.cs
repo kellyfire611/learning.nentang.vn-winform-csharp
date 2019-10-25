@@ -472,7 +472,18 @@ namespace QuanLyBanHang.Functions
             // Clear thông tin Đơn hàng
             // TODO: clear tất cả thông tin đã Binding của Đơn hàng
             order_dateDateTimePicker.Value = DateTime.Now;
+            shipped_dateDateTimePicker.Value = DateTime.Now;
             ship_nameTextBox.Text = "";
+            ship_address1TextBox.Text = "";
+            ship_address2TextBox.Text = "";
+            ship_cityTextBox.Text = "";
+            ship_stateTextBox.Text = "";
+            ship_postal_codeTextBox.Text = "";
+            ship_countryTextBox.Text = "";
+            nudShipping_fee.Value = 0;
+            payment_typeTextBox.Text = "";
+            paid_dateDateTimePicker.Value = DateTime.Now;
+            order_statusTextBox.Text = "";
 
             // Clear dữ liệu chi tiết đơn hàng
             cbbProduct.Text = "";
