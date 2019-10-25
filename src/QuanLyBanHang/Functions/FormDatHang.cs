@@ -457,6 +457,7 @@ namespace QuanLyBanHang.Functions
             LoadDanhSachNhanVien();
             LoadDanhSachKhachHang();
             LoadDanhSachSanPham();
+            LoadDanhMucCauHinh();
 
             // Chuyển đổi trạng thái của Form
             this.FormStatus = "View";
@@ -621,6 +622,83 @@ namespace QuanLyBanHang.Functions
 
         }
 
+        /// <summary>
+        /// Hàm dùng để load danh sách cấu hình
+        /// </summary>
+        public void LoadDanhMucCauHinh()
+        {
+            // Tạo câu lệnh để thực thi đến database
+            string queryString = "SELECT * FROM configs";
+
+            // Tạo object từ class SqlConnection (dùng để quản lý kết nối đến Database Server)
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    try
+                    {
+                        // Mở kết nối đến Database Server
+                        connection.Open();
+
+                        // Tạo object từ class SqlDataAdapter (dùng để lấy dữ liệu)
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = command;
+
+                        // Đổ dữ liệu vào dataset
+                        adapter.Fill(quanLyBanHangDatabaseDataSet.configs);
+
+                        // Ngắt kết nối đến Database Server
+                        connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Hiển thị thông báo nếu có lỗi
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Hàm dùng để load thông tin Khách hàng sử dụng Hóa đơn bởi ID khách hàng
+        /// </summary>
+        public void LoadCustomerTrongDonHang(int idKhachHang)
+        {
+            // Tạo câu lệnh để thực thi đến database
+            string queryString = String.Format("SELECT * FROM customer WHERE id = {0}", idKhachHang);
+
+            // Tạo object từ class SqlConnection (dùng để quản lý kết nối đến Database Server)
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Tạo object từ class SqlCommand (dùng để quản lý việc thực thi câu lệnh)
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    try
+                    {
+                        // Mở kết nối đến Database Server
+                        connection.Open();
+
+                        // Tạo object từ class SqlDataAdapter (dùng để lấy dữ liệu)
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = command;
+
+                        // Đổ dữ liệu vào dataset
+                        quanLyBanHangDatabaseDataSet.customers.Clear();
+                        adapter.Fill(quanLyBanHangDatabaseDataSet.customers);
+
+                        // Ngắt kết nối đến Database Server
+                        connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Hiển thị thông báo nếu có lỗi
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
             // Chuẩn bị dữ liệu
@@ -630,9 +708,70 @@ namespace QuanLyBanHang.Functions
                 var row = quanLyBanHangDatabaseDataSet.ReportHoaDonBanHang.NewReportHoaDonBanHangRow();
 
                 // Nạp thông tin Chung về Công ty lấy từ Cấu hình (config)
+                // CompanyName
+                var configCompanyName = quanLyBanHangDatabaseDataSet.configs.FirstOrDefault(p => p.key == "company.name");
+                if (configCompanyName != null)
+                {
+                    row.report_company_name = configCompanyName.value;
+                }
+                else
+                {
+                    row.report_company_name = "Chưa cấu hình [company.name]";
+                }
 
+                // CompanyTax
+                var configCompanyTax = quanLyBanHangDatabaseDataSet.configs.FirstOrDefault(p => p.key == "company.tax");
+                if (configCompanyTax != null)
+                {
+                    row.report_company_tax = configCompanyTax.value;
+                }
+                else
+                {
+                    row.report_company_tax = "Chưa cấu hình [company.tax]";
+                }
+
+                // CompanyAddress
+                var configCompanyAddress = quanLyBanHangDatabaseDataSet.configs.FirstOrDefault(p => p.key == "company.address");
+                if (configCompanyAddress != null)
+                {
+                    row.report_company_address = configCompanyAddress.value;
+                }
+                else
+                {
+                    row.report_company_address = "Chưa cấu hình [company.address]";
+                }
+
+                // CompanyTelephone
+                var configCompanyTelephone = quanLyBanHangDatabaseDataSet.configs.FirstOrDefault(p => p.key == "company.telephone");
+                if (configCompanyTelephone != null)
+                {
+                    row.report_company_telephone = configCompanyTelephone.value;
+                }
+                else
+                {
+                    row.report_company_telephone = "Chưa cấu hình [company.telephone]";
+                }
+
+                // CompanyBankAccount
+                var configCompanyBankAccount = quanLyBanHangDatabaseDataSet.configs.FirstOrDefault(p => p.key == "company.bankAccount");
+                if (configCompanyBankAccount != null)
+                {
+                    row.report_company_bank_account = configCompanyBankAccount.value;
+                }
+                else
+                {
+                    row.report_company_bank_account = "Chưa cấu hình [company.bankAccount]";
+                }
 
                 // Nạp thông tin về Khách hàng (customer)
+                int idKhachHang = Convert.ToInt32(cbbCustomer.SelectedValue);
+                var objCustomer = quanLyBanHangDatabaseDataSet.customers.FirstOrDefault(p => p.id == idKhachHang);
+                if (objCustomer != null)
+                {
+                    row.report_customer_fullname = String.Format("{0} {1}", objCustomer.last_name, objCustomer.first_name);
+                    row.report_customer_address = objCustomer.address1;
+                    row.report_customer_phone = objCustomer.phone;
+                }
 
                 // Nạp thông tin về Đơn hàng (order)
                 row.report_ordered_date_day = order_dateDateTimePicker.Value.Day.ToString();
