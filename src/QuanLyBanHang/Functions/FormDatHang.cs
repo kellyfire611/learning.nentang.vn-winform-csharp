@@ -54,6 +54,15 @@ namespace QuanLyBanHang.Functions
 
                         // Thông tin Chi tiết Đơn hàng
                         grpThongTinChiTietDonHang.Enabled = false;
+
+                        // Set trạng thái các nút button
+                        btnInHoaDon.Enabled = true;
+                        btnThem.Enabled = true;
+                        btnSua.Enabled = true;
+                        btnXoa.Enabled = true;
+                        btnLuu.Enabled = false;
+                        btnThoat.Enabled = true;
+                        btnThoat.Text = "Thoát";
                         break;
                     case "Create":
                         // Danh sách Đơn hàng
@@ -66,6 +75,15 @@ namespace QuanLyBanHang.Functions
 
                         // Thông tin Chi tiết Đơn hàng
                         grpThongTinChiTietDonHang.Enabled = true;
+
+                        // Set trạng thái các nút button
+                        btnInHoaDon.Enabled = false;
+                        btnThem.Enabled = false;
+                        btnSua.Enabled = false;
+                        btnXoa.Enabled = false;
+                        btnLuu.Enabled = true;
+                        btnThoat.Enabled = true;
+                        btnThoat.Text = "Hủy bỏ";
                         break;
                     case "Edit":
                         // Danh sách Đơn hàng
@@ -78,6 +96,15 @@ namespace QuanLyBanHang.Functions
 
                         // Thông tin Chi tiết Đơn hàng
                         grpThongTinChiTietDonHang.Enabled = true;
+
+                        // Set trạng thái các nút button
+                        btnInHoaDon.Enabled = false;
+                        btnThem.Enabled = false;
+                        btnSua.Enabled = false;
+                        btnXoa.Enabled = false;
+                        btnLuu.Enabled = true;
+                        btnThoat.Enabled = true;
+                        btnThoat.Text = "Hủy bỏ";
                         break;
                 }
             }
@@ -316,7 +343,6 @@ namespace QuanLyBanHang.Functions
                         adapter.Fill(quanLyBanHangDatabaseDataSet.order_details);
 
                         // Hiển thị dữ liệu
-                        quanLyBanHangDatabaseDataSet.order_details.Clear();
                         orderdetailsBindingSource.DataSource = quanLyBanHangDatabaseDataSet.order_details;
                         dgvChiTietDonHang.Refresh();
 
@@ -335,7 +361,7 @@ namespace QuanLyBanHang.Functions
         private void dgvDonHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Chỉ xử lý Binding khi Form đang ở trạng thái "View"
-            if(this.FormStatus != "View")
+            if (this.FormStatus != "View")
             {
                 return;
             }
@@ -365,11 +391,51 @@ namespace QuanLyBanHang.Functions
                 // TODO: bổ sung đầy đủ Binding cho các trường cần thiết
                 if (row.Cells["orderdateDataGridViewTextBoxColumn"].Value != null && row.Cells["orderdateDataGridViewTextBoxColumn"].Value != DBNull.Value)
                 {
-                    order_dateDateTimePicker.Text = row.Cells["orderdateDataGridViewTextBoxColumn"].Value.ToString();
+                    order_dateDateTimePicker.Value = Convert.ToDateTime(row.Cells["orderdateDataGridViewTextBoxColumn"].Value);
                 }
                 if (row.Cells["shipnameDataGridViewTextBoxColumn"].Value != null && row.Cells["shipnameDataGridViewTextBoxColumn"].Value != DBNull.Value)
                 {
                     ship_nameTextBox.Text = row.Cells["shipnameDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shipaddress1DataGridViewTextBoxColumn"].Value != null && row.Cells["shipaddress1DataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_address1TextBox.Text = row.Cells["shipaddress1DataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shipaddress2DataGridViewTextBoxColumn"].Value != null && row.Cells["shipaddress2DataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_address2TextBox.Text = row.Cells["shipaddress2DataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shipcityDataGridViewTextBoxColumn"].Value != null && row.Cells["shipcityDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_cityTextBox.Text = row.Cells["shipcityDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shipstateDataGridViewTextBoxColumn"].Value != null && row.Cells["shipstateDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_stateTextBox.Text = row.Cells["shipstateDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shippostalcodeDataGridViewTextBoxColumn"].Value != null && row.Cells["shippostalcodeDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_postal_codeTextBox.Text = row.Cells["shippostalcodeDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shipcountryDataGridViewTextBoxColumn"].Value != null && row.Cells["shipcountryDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    ship_countryTextBox.Text = row.Cells["shipcountryDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["shippingfeeDataGridViewTextBoxColumn"].Value != null && row.Cells["shippingfeeDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    nudShipping_fee.Text = row.Cells["shippingfeeDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["paymenttypeDataGridViewTextBoxColumn"].Value != null && row.Cells["paymenttypeDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    payment_typeTextBox.Text = row.Cells["paymenttypeDataGridViewTextBoxColumn"].Value.ToString();
+                }
+                if (row.Cells["paiddateDataGridViewTextBoxColumn"].Value != null && row.Cells["paiddateDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    paid_dateDateTimePicker.Value = Convert.ToDateTime(row.Cells["paiddateDataGridViewTextBoxColumn"].Value);
+                }
+                if (row.Cells["orderstatusDataGridViewTextBoxColumn"].Value != null && row.Cells["orderstatusDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    order_statusTextBox.Text = row.Cells["orderstatusDataGridViewTextBoxColumn"].Value.ToString();
                 }
 
                 // Load chi tiết đơn hàng bởi ID đơn hàng
@@ -581,6 +647,20 @@ namespace QuanLyBanHang.Functions
         private void btnXoa_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            if (btnThoat.Text == "Hủy bỏ")
+            {
+                // Chuyển trạng thái Form về "View"
+                this.FormStatus = "View";
+            }
+            else
+            {
+                // Đóng Form
+                this.Close();
+            }
         }
     }
 }
