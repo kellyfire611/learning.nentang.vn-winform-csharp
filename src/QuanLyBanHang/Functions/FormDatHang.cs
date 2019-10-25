@@ -393,6 +393,10 @@ namespace QuanLyBanHang.Functions
                 {
                     order_dateDateTimePicker.Value = Convert.ToDateTime(row.Cells["orderdateDataGridViewTextBoxColumn"].Value);
                 }
+                if (row.Cells["shippedDateDataGridViewTextBoxColumn"].Value != null && row.Cells["shippedDateDataGridViewTextBoxColumn"].Value != DBNull.Value)
+                {
+                    shipped_dateDateTimePicker.Value = Convert.ToDateTime(row.Cells["shippedDateDataGridViewTextBoxColumn"].Value);
+                }
                 if (row.Cells["shipnameDataGridViewTextBoxColumn"].Value != null && row.Cells["shipnameDataGridViewTextBoxColumn"].Value != DBNull.Value)
                 {
                     ship_nameTextBox.Text = row.Cells["shipnameDataGridViewTextBoxColumn"].Value.ToString();
@@ -490,7 +494,7 @@ namespace QuanLyBanHang.Functions
         private void btnThemChiTiet_Click(object sender, EventArgs e)
         {
             // Chuẩn bị dữ liệu thêm dòng mới
-            int orderId = 0;
+            int orderId = quanLyBanHangDatabaseDataSet.order_details.Rows.Count + 1; // Tạo OrderID giả làm STT
             int productId = ((KeyValuePair<int, string>)cbbProduct.SelectedItem).Key;
             decimal soLuong = nudSoLuong.Value;
             decimal donGia = nudDonGia.Value;
