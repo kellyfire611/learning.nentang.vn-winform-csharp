@@ -1,5 +1,5 @@
 # Thông tin Khóa học
-# [https://learning.nentang.vn-winform-csharp](learning.nentang.vn-winform-csharp)
+# [https://learning.nentang.vn-winform-csharp](https://learning.nentang.vn-winform-csharp)
 - Các bài học miễn phí về Lập trình
 - Học lập trình WinForm C# - Learning WinForm C#
 - Xem nhiều hơn tại [https://nentang.vn](https://nentang.vn)
