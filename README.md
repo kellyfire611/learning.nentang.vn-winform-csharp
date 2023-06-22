@@ -9,3 +9,14 @@
 ```
 Install-Package Microsoft.ReportingServices.ReportViewerControl.WinForms
 ```
+
+# Kích thước chuẩn thiết kế Màn hình APP
+- qqVGA: 160 x 120
+- qVGA: 320 x 240
+- Small: 320 x 480
+- Standard: 720 x 480
+- HD: 1280 x 720
+- Full HD: 1920 x 1080
+- 2k: 2048 x 1080
+- 4k: 3840 x 2160
+- 8k: 7680 x 4320
