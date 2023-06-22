@@ -7,4 +7,4 @@
 # Học là phải THỰC HÀNH ❤🧡💛💚💙💜
 
 # Link bài học
-[WinForm C# - Bài tập 1.1 | NenTang.vn](https://nentang.vn/app/edu/khoa-hoc/dot-net/lap-trinh-winform-c-sharp/lessons/lab-1-1-tao-giao-dien-trang-dang-nhap-bang-winform-csharp)
+[WinForm C# - Bài tập 1.2| NenTang.vn](https://nentang.vn/app/edu/khoa-hoc/dot-net/lap-trinh-winform-c-sharp/lessons/lab-1-2-tao-chuong-trinh-may-tinh-bo-tui-tinh-toan-cong-tru-nhan-chia-bang-winform-c-sharp)
