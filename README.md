@@ -1,6 +1,12 @@
-# learning.nentang.vn-winform-csharp
-- Các bài học miễn phí về lập trình Winform C#.
+# Thông tin Khóa học
+# [https://learning.nentang.vn-winform-csharp](learning.nentang.vn-winform-csharp)
+- Các bài học miễn phí về Lập trình
+- Học lập trình WinForm C# - Learning WinForm C#
 - Xem nhiều hơn tại [https://nentang.vn](https://nentang.vn)
+
+# Học là phải THỰC HÀNH ❤🧡💛💚💙💜
+
+[![assets/img/logo-nentang.jpg](assets/img/logo-nentang.jpg)](https://nentang.vn)
 
 # Các chương trình cần thiết để lập trình C#
 - Visual studio 2017+ Community ([https://visualstudio.microsoft.com/](https://visualstudio.microsoft.com/))
