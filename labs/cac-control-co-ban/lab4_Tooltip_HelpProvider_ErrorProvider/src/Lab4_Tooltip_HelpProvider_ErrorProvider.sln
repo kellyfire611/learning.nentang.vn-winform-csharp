@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab4_Tooltip_HelpProvider_ErrorProvider", "Lab4_Tooltip_HelpProvider_ErrorProvider.csproj", "{0F8E6B3F-7DAC-40F7-81CD-19AB164814A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F8E6B3F-7DAC-40F7-81CD-19AB164814A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8E6B3F-7DAC-40F7-81CD-19AB164814A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8E6B3F-7DAC-40F7-81CD-19AB164814A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8E6B3F-7DAC-40F7-81CD-19AB164814A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F2F6C6C-32E7-4A65-81F9-DDC1C76B1D14}
+	EndGlobalSection
+EndGlobal
