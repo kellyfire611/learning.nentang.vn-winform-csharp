@@ -17,7 +17,8 @@ namespace Lab3_ComboBox_ListBox
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmMain());
-            Application.Run(new FrmGopY());
+            //Application.Run(new FrmGopY());
+            Application.Run(new FrmGopY_2());
         }
     }
 }

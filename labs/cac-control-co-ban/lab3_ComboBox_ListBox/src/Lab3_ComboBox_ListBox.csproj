@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmGopY_2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGopY_2.Designer.cs">
+      <DependentUpon>FrmGopY_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGopY.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmGopY_2.resx">
+      <DependentUpon>FrmGopY_2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGopY.resx">
       <DependentUpon>FrmGopY.cs</DependentUpon>
     </EmbeddedResource>
